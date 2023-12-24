@@ -26,7 +26,7 @@ function WeatherData(stationName=[]) {
 }
 WeatherData.prototype.GetServerData = function(){
     this.LastQueryTime = Date.now();
-    let url = `http://opendata.cwa.gov.tw/api/v1/rest/datastore/O-A0001-001?Authorization=CWA-DEB7E776-FDBF-4EEC-8F66-C8E9FB1BEF80&format=JSON&StationName=`;
+    let url = `https://opendata.cwa.gov.tw/api/v1/rest/datastore/O-A0001-001?Authorization=CWA-DEB7E776-FDBF-4EEC-8F66-C8E9FB1BEF80&format=JSON&StationName=`;
     for(let i=0;i<this.stationName.length;i++){
         url += encodeURI(this.stationName[i]);
         if(i==this.stationName.length-1) break;
