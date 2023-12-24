@@ -241,7 +241,7 @@ function setup() {
 }
 
 function updateUI(data){
-    // $('#wind-speed-text').text(`${data['WindSpeed']}m/s`);
+    $('#wind-speed-text').text(`${data['WindSpeed']}m/s`);
     // $('#wind-speed-text').text(`HIHIm/s`);
 }
 

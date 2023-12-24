@@ -42,7 +42,7 @@ WeatherData.prototype.GetServerData = function(){
         console.log(data);
         // console.log(data.records.Station);
         // $('#wind-speed-text').text(`${data['success']}m/s`);
-        $('#wind-speed-text').text(`2352345m/s`);
+        // $('#wind-speed-text').text(`2352345m/s`);
         for(let i=data.records.Station.length-1;i>=0;i--){
             this.ObsTime = data.records.Station[i].ObsTime.DateTime;
             let target = data.records.Station[i].WeatherElement;
