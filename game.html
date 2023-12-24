@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="風的介面延伸自紀柏豪與Chocho在墨西哥的《無形介面 Invisible Interfaces》是一個跨學科創作計畫，聚焦於環境感知和氣候議題。融聲創意與dériveLAB、BEMA，前往墨西哥進行交流與駐地創作。我們希望透過當代藝術方法和新興技術來了解和認識氣候緊急情況，以彌合生態信息和接收者之間的差距。">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&family=Zen+Maru+Gothic:wght@500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+    <script src="/static/js/weather.js"></script>
+    <script src="/static/js/index.js"></script>
+    <title>地景藝術節-風的介面動態</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+    <style>
+        body {
+          font-family: 'Noto Sans TC', sans-serif;
+          /* font-family: 'Microsoft JhengHei', sans-serif; */
+          font-style: normal;
+          background-color: #9AD3E5;
+        }
+    </style>
+</head>
+<script>
+function WindowWH(){
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+    // if(w>h&&w<1024) h = w+w/2;
+    $('#p5-container').height(h);
+    $('#layer-top').width(w).height(h);
+    $('#content-top').height(h);
+    $('#layer-mid').width(w).height(h);
+    $('#fix-h').height(h);
+}
+$(window).resize(function() {
+    WindowWH();
+});
+$(window).ready(function() {
+    WindowWH();
+});
+</script>
+<body>
+<div id="p5-container" style="position: relative;overflow-x: hidden;overflow-y: hidden;">
+    <div id="layer-top" style="position: absolute;z-index: 2;">
+        <div id="content-top" style="position: relative;overflow-x: hidden;overflow-y: hidden;z-index: 2;">
+            <!-- <div id="rnbo-root">
+                <div id="rnbo-inports">
+                    <h2>Inports</h2>
+                    <em id="no-inports-label">No inports available</em>
+                    <form id="inport-form" className="inport">
+                        <div className="inport-input">
+                            <select id="inport-select"></select>
+                            <input id="inport-text" type="text"></input>
+                            <input id="inport-submit" className="smallButton" type="submit" value="Send"/>
+                        </div>
+                    </form>
+                </div>
+                <div id="rnbo-parameter-sliders">
+                    <h2>Parameters</h2>
+                    <em id="no-param-label">No parameters</em>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <div id="layer-mid" style="position: absolute;z-index: 1;">
+        <div id="content-mid" style="position: relative;overflow-x: hidden;overflow-y: hidden;z-index: 1;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div id="fix-h" class="position-relative">
+                            <div class="position-absolute" style="right: 1px;">
+                                <div class="info-text text-end" style="font-family: 'Zen Maru Gothic';">風速</div>
+                                <div id="wind-speed-text" class="info-value text-end" style="font-family: 'Quicksand';">1m/s</div>
+                            </div>
+                            <div class="position-absolute" style="left: 0px;bottom: -2%">
+                                <div class="info-text text-start v-text" style="font-family: 'Zen Maru Gothic';margin-left: -10%;margin-bottom: 5%;">濕度</div>
+                                <div id="humidity-text" class="info-value text-start" style="font-family: 'Quicksand';">70%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+<!-- <script type="text/javascript" src="/static/js/app.js"></script> -->
+<script src="/static/js/game.js"></script>
+
+</body>
+</html>
