@@ -89,6 +89,10 @@ async function setup() {
     // (Optional) Connect MIDI inputs
     // makeMIDIKeyboard(device);
 
+    $('#layer-load').hide();
+        let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+        myModal.show();
+
     document.body.onclick = () => {
         context.resume();
     }
@@ -155,6 +159,7 @@ function makeSliders(device) {
             slider.setAttribute("name", param.name);
             slider.setAttribute("min", param.min);
             slider.setAttribute("max", param.max);
+            slider.style.visibility = "hidden";
             if (param.steps > 1) {
                 slider.setAttribute("step", (param.max - param.min) / (param.steps - 1));
             } else {

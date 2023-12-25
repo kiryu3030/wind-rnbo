@@ -31,6 +31,8 @@ function WindowWH(){
     let h = window.innerHeight;
     // if(w>h&&w<1024) h = w+w/2;
     $('#p5-container').height(h);
+    $('#layer-load').width(w).height(h);
+    $('#fix-h1').height(h);
     $('#layer-top').width(w).height(h);
     $('#content-top').height(h);
     $('#layer-mid').width(w).height(h);
@@ -45,25 +47,34 @@ $(window).ready(function() {
 </script>
 <body>
 <div id="p5-container" style="position: relative;overflow-x: hidden;overflow-y: hidden;">
-    <div id="layer-top" style="position: absolute;z-index: 2;">
+    <div id="layer-load" style="position: absolute;z-index: 3;background-color: white;">
+        <div id="content-load" style="position: relative;overflow-x: hidden;overflow-y: hidden;z-index: 3;">
+            <div id="fix-h1" class="d-flex align-items-center justify-content-center">
+                <div class="spinner-border" role="status" style="margin-right: 10px;">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <div>Loading......</div>
+            </div>
+        </div>
+    </div>
+    <div id="layer-top" style="position: absolute;z-index: 2;opacity: 0.5;">
         <div id="content-top" style="position: relative;overflow-x: hidden;overflow-y: hidden;z-index: 2;">
-            <!-- <div id="rnbo-root">
-                <div id="rnbo-inports">
-                    <h2>Inports</h2>
+            <div id="rnbo-root">
+                <div>顯示測試數值</div>
+                <!-- <div id="rnbo-inports">
                     <em id="no-inports-label">No inports available</em>
                     <form id="inport-form" className="inport">
                         <div className="inport-input">
                             <select id="inport-select"></select>
                             <input id="inport-text" type="text"></input>
-                            <input id="inport-submit" className="smallButton" type="submit" value="Send"/>
+                            <input className="smallButton" type="submit" value="Send"/>
                         </div>
                     </form>
-                </div>
+                </div> -->
                 <div id="rnbo-parameter-sliders">
-                    <h2>Parameters</h2>
                     <em id="no-param-label">No parameters</em>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
     <div id="layer-mid" style="position: absolute;z-index: 1;">
@@ -74,11 +85,11 @@ $(window).ready(function() {
                         <div id="fix-h" class="position-relative">
                             <div class="position-absolute" style="right: 1px;">
                                 <div class="info-text text-end" style="font-family: 'Zen Maru Gothic';">風速</div>
-                                <div id="wind-speed-text" class="info-value text-end" style="font-family: 'Quicksand';">1m/s</div>
+                                <div id="wind-speed-text" class="info-value text-end" style="font-family: 'Quicksand';">-m/s</div>
                             </div>
                             <div class="position-absolute" style="left: 0px;bottom: -2%">
                                 <div class="info-text text-start v-text" style="font-family: 'Zen Maru Gothic';margin-left: -10%;margin-bottom: 5%;">濕度</div>
-                                <div id="humidity-text" class="info-value text-start" style="font-family: 'Quicksand';">70%</div>
+                                <div id="humidity-text" class="info-value text-start" style="font-family: 'Quicksand';">--%</div>
                             </div>
                         </div>
                     </div>
@@ -87,9 +98,40 @@ $(window).ready(function() {
         </div>
     </div>
 </div>
-
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color: #000000;opacity: 0.4;">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row justify-content-center text-center">
+                        <div class="col-12" style="color: white;">
+                            <img src="static/img/headphone.svg">
+                            <h4>請使用耳機以獲得最佳體驗</h4>
+                            <h6>或確保您的聲音已開啟並且調高音量</h6>
+                            <!-- <button id="inport-submit" type="button" value="Send" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                            <div id="rnbo-inports" style="visibility:hidden">
+                                <em id="no-inports-label">No inports available</em>
+                                <form id="inport-form">
+                                    <div>
+                                        <select id="inport-select"></select>
+                                        <input id="inport-text" type="text"></input>
+                                        
+                                    </div>
+                                    <div>
+                                        <input id="inport-submit"  class="btn btn-secondary" data-bs-dismiss="modal" type="submit" value="確定" style="visibility: visible"/>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-<!-- <script type="text/javascript" src="static/js/app.js"></script> -->
+<script type="text/javascript" src="static/js/app.js"></script>
 <script src="static/js/game.js"></script>
 
 </body>

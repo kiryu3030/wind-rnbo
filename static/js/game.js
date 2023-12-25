@@ -77,7 +77,7 @@ Kite.prototype.DrawKite = function(){
     this.p.add(this.v);
     
     if (this.p.x<canvasW*0.1) {this.v.x = 0;this.vmax.x= abs(this.vmax.x);this.a.x= abs(this.a.x);}
-    if (this.p.x>canvasW/2+20) {this.v.x = 0;this.vmax.x = -abs(this.vmax.x);this.a.x = -abs(this.a.x);}
+    if (this.p.x>canvasW/2+10) {this.v.x = 0;this.vmax.x = -abs(this.vmax.x);this.a.x = -abs(this.a.x);}
     if (this.p.y<100) {this.v.y = 0;this.vmax.y= abs(this.vmax.y);this.a.y= abs(this.a.y);}
     if (this.p.y>canvasH*0.55) {this.v.y = 0;this.vmax.y = -abs(this.vmax.y);this.a.y = -abs(this.a.y);}
     
@@ -86,12 +86,8 @@ Kite.prototype.DrawKite = function(){
         strokeWeight(3);
         fill(1,0,100);
         translate(this.p.x, this.p.y);
-        // this.angle = this.v.heading();
         let tem = createVector(0,0);
-        // tem.add(this.v).add(this.tem);
         image(kiteImg, 0, 0);
-        // rotate(tem.heading());
-        // triangle(-this.r, -this.r/1.5, -this.r, this.r/1.5, this.r, 0);
     pop();
 };
 function Line(p, offset, c){
@@ -241,36 +237,51 @@ function setup() {
 }
 
 function updateUI(data){
-    $('#wind-speed-text').text(`${data['WindSpeed']}m/s`);
-    // $('#wind-speed-text').text(`HIHIm/s`);
+    $('#wind-speed-text').text(`${data['WindSpeed'].toFixed(1)}m/s`);
+    $('#humidity-text').text(`${Math.round(data['RelativeHumidity'])}%`);
+}
+function updateParam(data){
+    windSpeedRnbo.val(data['WindSpeed'].toFixed(1));
+    // windSpeedRnbo.val(8.5);
+    windSpeedRnbo.get(0).dispatchEvent(event33);
+    humidityRnbo.val(data['RelativeHumidity'].toFixed(1));
+    humidityRnbo.get(0).dispatchEvent(event33);
+    temperatureRnbo.val(data['AirTemperature'].toFixed(1));
+    temperatureRnbo.get(0).dispatchEvent(event33);
 }
 
 let s = Date.now();
+let sr = Date.now();
 let diff = 0;
+let diffRnbo = 0;
 let waitData = true;
+let humidityRnbo;
+let temperatureRnbo;
+let windSpeedRnbo;
 let event33 = new Event('change');
 function draw() {
     clear();
     // background(215,60,60);
     diff = Date.now() - s;
-    if(waitData && diff/1000>1){
-        waitData = false;
-        s = Date.now();
-        data = w.GetData();
-        console.log(data);
-        updateUI(data);
-    }
-    if(diff/1000>10){
-        s = Date.now();
-        data = w.GetData();
-        console.log(data);
-        updateUI(data);
-        // $('#wind-speed-text').text(`${data['WindSpeed'].toFixed(1)}m/s`)
-        // let humidity = $('#humidity');
-        // let temperature = $('#temperature');
-        // let windSpeed = $('#wind_speed');
-        // windSpeed.val(data['WindSpeed']);
-        // windSpeed.get(0).dispatchEvent(event33);
+    if($('#layer-load').is(":hidden")){
+        if(waitData && diff/1000>2){
+            waitData = false;
+            s = Date.now();
+            data = w.GetData();
+            console.log(data);
+            updateUI(data);
+            humidityRnbo = $('#humidity');
+            temperatureRnbo = $('#temperature');
+            windSpeedRnbo = $('#wind_speed');
+            updateParam(data);
+        }
+        if(diff/1000>10){
+            s = Date.now();
+            data = w.GetData();
+            console.log(data);
+            updateUI(data);
+            updateParam(data);
+        }
     }
     for(let i=0;i<lines.length;i++){
         lines[i].DrawLine();
